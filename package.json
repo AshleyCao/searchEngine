@@ -1,0 +1,17 @@
+{
+  "name": "searchengine",
+  "preferGlobal": true,
+  "bin": "./contact.js",
+  "version": "1.0.0",
+  "description": "CLI for data searching",
+  "main": "index.js",
+  "repository": "git@github.com:AshleyCao/searchEngine.git",
+  "author": "ash",
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.19.0",
+    "inquirer": "^6.2.2",
+    "mongodb": "^3.2.2",
+    "mongoose": "^5.4.20"
+  }
+}
