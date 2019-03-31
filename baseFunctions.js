@@ -1,5 +1,6 @@
 const jsonfile = require('jsonfile')
 const Table = require('cli-table2');
+const errorReport = './data/error.json';
 
 class BaseFuncations {
     /**
@@ -8,10 +9,13 @@ class BaseFuncations {
      * @param {*} group  
      */
     constructor(group){
+        this.group = group.toString();
         this.fileName = `./data/${this.group}.json`;
         this.searchableField = [];
         this.firstElement = null;
         this.allData = [];
+        this.findResult = [];
+        this.fileIndex =0;
     }
     /**
      * Get searchable fields
@@ -26,14 +30,19 @@ class BaseFuncations {
      * Initalise all varables
      */
     readInData(){
+        let ifErrorExist = false;
         try { 
             const data =  jsonfile.readFileSync(this.fileName)
             this.firstElement = data[0];
             this.searchableField = Object.keys(this.firstElement);
             this.allData = data;
         } catch(e){
-            console.error(e);
+            ifErrorExist = true;
+            console.error(`File error ${e}`);
+            this.writeErrorReport('File error', e.toString());
         }
+
+        return ifErrorExist;
     }
 
     /**
@@ -46,9 +55,11 @@ class BaseFuncations {
     async seachItem(filed,value){
         let searchResult = null;
         value ? searchResult =   filterValue(this.allData, filed, value) : searchResult =  this.allData;
+        
         if (searchResult.length == 0) {
         searchResult = "Sorry, there is no result";
         } else {
+            this.findResult = searchResult;
             searchResult = await this.reformatSearchRes(searchResult);
         }
         return searchResult;
@@ -62,6 +73,28 @@ class BaseFuncations {
             return obj.filter((v)=>{ return v[key] == value});
           }
     }
+    exportData(){
+        try{
+        const exportDate = new Date(Date.now()).toISOString().split('T')[0] + this.group.toString() + (++this.fileIndex);
+        const exportfile = `.//exportData/${exportDate}.json`;
+        jsonfile.writeFileSync(exportfile, this.findResult, { spaces: 2, EOL: '\r\n' });
+        console.log(`Please find export data file at ${exportfile}`);
+        } catch (e) {
+            console.error(`Export data error ${e}`);
+            this.writeErrorReport('export file error', e.toString());
+        }
+    }
+
+    writeErrorReport(errorType, error){
+        try{
+            const occurTime = new Date(Date.now()).toISOString();
+            const exportError = {time: occurTime,type: errorType, info: error };
+            jsonfile.writeFileSync(errorReport, exportError, { flag:'a',spaces: 2}); 
+        } catch (e) {
+                console.error(`Fail to write error to error.josn due to ${e}`);
+        }
+    }
+    
     /**
      * Set search result in more readable format
      * Use Vertical Table (npm) 
@@ -71,6 +104,7 @@ class BaseFuncations {
      */
     reformatSearchRes(res){
         const dataInTableFormat = new Table();
+        try{
         res.forEach((element, index) => {
             dataInTableFormat.push({Record: index+1})
             Object.keys(element).map((key) => {
@@ -81,6 +115,10 @@ class BaseFuncations {
               dataInTableFormat.push(newObj);
             });
         });
+    } catch(e) {    
+        console.error(`reformat error ${e}`);
+        this.writeErrorReport('reformat error', e.toString());
+    }
       
         return dataInTableFormat.toString(); 
     }
