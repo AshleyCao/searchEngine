@@ -1,95 +1,38 @@
 #!/usr/bin/env node
-
 const program = require('commander');
-const { prompt } = require('inquirer'); 
-const { selectMenu, mainMenuOptions } = require('./menu');
-const { 
-  addContact,
-  getContact,
-  getContactList,
-  updateContact,
-  deleteContact
-} = require('./logic'); 
-
-const questions = [
-  {
-    type : 'input',
-    name : 'firstname',
-    message : 'Enter firstname ..'
-  },
-  {
-    type : 'input',
-    name : 'lastname',
-    message : 'Enter lastname ..'
-  },
-  {
-    type : 'input',
-    name : 'phone',
-    message : 'Enter phone number ..'
-  },
-  {
-    type : 'input',
-    name : 'email',
-    message : 'Enter email address ..'
-  }
-];
+const { prompt } = require('inquirer');
+const {  mainMenuOptions , getSearchfield } = require('./menu');
+const BaseFuncations = require('./baseFunctions');
 
 program
   .version('0.0.1')
-  .description('Contact management system');
+  .description('Search Engine');
 
-
+/**
+ * Start Program
+ */
 program
 .command('selectMenu')
 .alias("start")
 .description('Start menu')
-.action(() => {
-  prompt(mainMenuOptions).then(answers => 
-    selectMenu(answers), error =>{
-    console.error("Error")
+.action(async () => {
+  const answers = await prompt(mainMenuOptions);
+  const readinData = new BaseFuncations(answers.searchgroup)
+  await readinData.readInData();
+  const allSearchfields = getSearchfield(readinData.searchableField);
+  const field = await prompt(allSearchfields);
+  const value = await prompt(  {
+    type : 'input',
+    name : 'searchvalue',
+    message : 'Enter search value'
+  });
+const result = await readinData.seachItem(field.searchfields, value.searchvalue);
+console.log(result);
 });
-});
-
-program
-  .command('addContact')
-  .alias('a')
-  .description('Add a contact')
-  .action(() => {
-    prompt(questions).then(answers =>addContact(answers), error =>{
-      console.error("Error")
-  });
-  });
-
-program
-  .command('getContact <name>')
-  .alias('r')
-  .description('Get contact')
-  .action(name => getContact(name));
-
-program
-  .command('updateContact <_id>')
-  .alias('u')
-  .description('Update contact')
-  .action(_id => {
-    prompt(questions).then((answers) =>
-      updateContact(_id, answers));
-  });
-
-program
-  .command('deleteContact <_id>')
-  .alias('d')
-  .description('Delete contact')
-  .action(_id => deleteContact(_id));
-
-program
-  .command('getContactList')
-  .alias('l')
-  .description('List contacts')
-  .action(() => getContactList());
 
 // Assert that a VALID command is provided 
 if (!process.argv.slice(2).length || !/[arudl]/.test(process.argv.slice(2))) {
   program.outputHelp();
-  process.exit();
+  //process.exit();
 }
 program.parse(process.argv)
