@@ -1,12 +1,18 @@
 const jsonfile = require('jsonfile')
 const Table = require('cli-table2');
-const errorReport = './data/error.json';
-
+const errorReport = './data/error.txt';
+const fs = require('fs');
+/**
+ * All executions on data
+ */
 class BaseFuncations {
     /**
+     * group: select among user, tickets and organizations
      * searchableField : list all fields for search
      * firstElement: for set up search fields
-     * @param {*} group  
+     * allData: all records in each json file
+     * findResult: all found results
+     * fileIndex: for creatign unique file name of export data file
      */
     constructor(group){
         this.group = group.toString();
@@ -70,13 +76,26 @@ class BaseFuncations {
          * @param {*} value 
          */
         function filterValue(obj, key, value) {
-            return obj.filter((v)=>{ return v[key] == value});
+            return obj.filter((v)=>{ 
+                // In 'tags' field, make user able to select by one value in tags array
+                if(key === 'tags') {
+                    if (v[key].toString().indexOf(value) !== -1){
+                        return v[key].toString().indexOf(value) !== -1
+                    }
+                } else {
+                return v[key] == value
+            }
+            });
           }
     }
+    /**
+     * Export search data
+     * File is named by time, search group and file index
+     */
     exportData(){
         try{
         const exportDate = new Date(Date.now()).toISOString().split('T')[0] + this.group.toString() + (++this.fileIndex);
-        const exportfile = `.//exportData/${exportDate}.json`;
+        const exportfile = `./data/exportData/${exportDate}.json`;
         jsonfile.writeFileSync(exportfile, this.findResult, { spaces: 2, EOL: '\r\n' });
         console.log(`Please find export data file at ${exportfile}`);
         } catch (e) {
@@ -84,12 +103,19 @@ class BaseFuncations {
             this.writeErrorReport('export file error', e.toString());
         }
     }
-
+    /**
+     * Record all error and write in error report
+     * @param {*} errorType 
+     * @param {*} error 
+     */
     writeErrorReport(errorType, error){
         try{
             const occurTime = new Date(Date.now()).toISOString();
-            const exportError = {time: occurTime,type: errorType, info: error };
-            jsonfile.writeFileSync(errorReport, exportError, { flag:'a',spaces: 2}); 
+            const exportError =`time: ${occurTime}, type:${errorType}, info: ${error}` ;
+            fs.appendFile(errorReport, `\n${exportError}`, (err) => {  
+                if (err) throw err;
+               
+            }); 
         } catch (e) {
                 console.error(`Fail to write error to error.josn due to ${e}`);
         }

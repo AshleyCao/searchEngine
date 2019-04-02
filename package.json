@@ -1,7 +1,7 @@
 {
   "name": "searchengine",
   "preferGlobal": true,
-  "bin": "./contact.js",
+  "bin": "./start.js",
   "version": "1.0.0",
   "description": "CLI for data searching",
   "main": "index.js",
@@ -18,5 +18,8 @@
     "jsonfile": "^5.0.0",
     "mongodb": "^3.2.2",
     "mongoose": "^5.4.20"
+  },
+  "devDependencies": {
+    "jest": "^24.5.0"
   }
 }

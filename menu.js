@@ -42,8 +42,9 @@ this.confirmExport = [
 ]
 }
 /**
- * @function  [addContact]
- * @returns {String} Status
+ * Get seachable fields
+ * @param {*} allfields 
+ * @returns all searchable fileds
  */
  getSearchfield(allfields){
   return {
@@ -54,14 +55,20 @@ this.confirmExport = [
   }
 };
 
-
+  /**
+   * Select read in file among data.json user.json tickets.json
+   * @returns if error happens whern open and read json file 
+   */
   async selectGroup(){
     const answers = await prompt(this.mainMenuOptions);
     this.baseFuncModel = new BaseFuncations(answers.searchgroup)
     const ifHasError =  await this.baseFuncModel.readInData();
     return ifHasError;
   }
-
+  /**
+   * Search data in search fileds
+   * print out research result
+   */
   async selectField(){
     const allSearchfields = this.getSearchfield(this.baseFuncModel.searchableField);
     const field = await prompt(allSearchfields);
@@ -72,16 +79,17 @@ this.confirmExport = [
     });
     const result = await this.baseFuncModel.seachItem(field.searchfields, value.searchvalue);
     console.log(result);
-    if (this.baseFuncModel.findResult.length !== 0){
-    const ifexport = await prompt(this.confirmExport);
+    // Only enable export data function when there are more than one result found
+    if (result.indexOf('Sorry') === -1) {
+      const ifexport = await prompt(this.confirmExport);
     if(ifexport.ifExport)
     this.baseFuncModel.exportData();
     }
     return;
   }
-  async confirmExport(){
-
-  }
+/**
+ * Recuisive menu
+ */
   async selectRestartOption(){
     const resOption = await prompt(this.restartMenu);
     switch(resOption.restartOptions){
@@ -97,7 +105,10 @@ this.confirmExport = [
     await this.selectRestartOption();
     return;
   }
-
+/**
+ * run when user select search in different file
+ * Combine select file and select field functions
+ */
   async runningMenu () {
     const hasError = await this.selectGroup();
     if(!hasError){
