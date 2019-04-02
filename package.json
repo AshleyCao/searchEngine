@@ -16,9 +16,7 @@
     "cli-table2": "^0.2.0",
     "commander": "^2.19.0",
     "inquirer": "^6.2.2",
-    "jsonfile": "^5.0.0",
-    "mongodb": "^3.2.2",
-    "mongoose": "^5.4.20"
+    "jsonfile": "^5.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.0",
