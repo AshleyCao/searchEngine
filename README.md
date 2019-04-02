@@ -32,7 +32,8 @@ You can search by one object in tags.
 All catch error will be written in error.txt automatically
 
 ## Aboout testing
-Search Engine uses [Jest](https://jestjs.io/) as testing framework and there are five testing cases in baseFunctions.test.js. 
+Search Engine uses [Jest](https://jestjs.io/) as testing framework and there are five testing cases in baseFunctions.test.js.
+Run ```yarn test``` to get test suit.
 
 ## Plugins
 Search Engine is currently extended with the following plugins.
