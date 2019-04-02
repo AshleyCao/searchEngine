@@ -17,19 +17,12 @@ class BaseFuncations {
     constructor(group){
         this.group = group.toString();
         this.fileName = `./data/${this.group}.json`;
+        this.fileError = false;
         this.searchableField = [];
         this.firstElement = null;
         this.allData = [];
         this.findResult = [];
         this.fileIndex =0;
-    }
-    /**
-     * Get searchable fields
-     * @param {*} firstObj 
-     * @returns searchable fields
-     */
-    getAllSearchableField(firstObj){
-        return Object.keys(firstObj);
     }
     
     /**
@@ -44,6 +37,7 @@ class BaseFuncations {
             this.allData = data;
         } catch(e){
             ifErrorExist = true;
+            this.fileError = true;
             console.error(`File error ${e}`);
             this.writeErrorReport('File error', e.toString());
         }
@@ -53,14 +47,14 @@ class BaseFuncations {
 
     /**
      * Search for desire items
-     * @param {*} filed 
+     * @param {*} field 
      * @param {*} value 
      * @returns searchResult
      */
 
-    async seachItem(filed,value){
+    async seachItem(field,value){
         let searchResult = null;
-        value ? searchResult =   filterValue(this.allData, filed, value) : searchResult =  this.allData;
+        value ? searchResult =   filterValue(this.allData, field, value) : searchResult =  this.allData;
         
         if (searchResult.length == 0) {
         searchResult = "Sorry, there is no result";
@@ -100,6 +94,7 @@ class BaseFuncations {
         console.log(`Please find export data file at ${exportfile}`);
         } catch (e) {
             console.error(`Export data error ${e}`);
+            this.fileError = true;
             this.writeErrorReport('export file error', e.toString());
         }
     }
@@ -117,6 +112,7 @@ class BaseFuncations {
                
             }); 
         } catch (e) {
+            this.fileError = true;
                 console.error(`Fail to write error to error.josn due to ${e}`);
         }
     }
