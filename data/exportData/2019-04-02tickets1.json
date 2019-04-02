@@ -1,0 +1,71 @@
+[
+  {
+    "_id": "916aab4a-0577-40cf-8f56-a45912a6ac23",
+    "url": "http://initech.zendesk.com/api/v2/tickets/916aab4a-0577-40cf-8f56-a45912a6ac23.json",
+    "external_id": "9fbaddb4-d72f-4270-baf9-dba1de59bb4b",
+    "created_at": "2016-05-14T11:36:47 -10:00",
+    "type": "task",
+    "subject": "A Nuisance in Togo",
+    "description": "Magna dolor do enim velit incididunt reprehenderit aute consequat irure fugiat ullamco. Nulla tempor occaecat consectetur culpa consectetur proident culpa.",
+    "priority": "low",
+    "status": "pending",
+    "submitter_id": 19,
+    "assignee_id": 39,
+    "organization_id": 110,
+    "tags": [
+      "Mississippi",
+      "Marshall Islands",
+      "South Dakota",
+      "Montana"
+    ],
+    "has_incidents": false,
+    "due_at": "2016-08-15T01:19:11 -10:00",
+    "via": "chat"
+  },
+  {
+    "_id": "d4c901be-7094-4f65-8a9b-43df949d5344",
+    "url": "http://initech.zendesk.com/api/v2/tickets/d4c901be-7094-4f65-8a9b-43df949d5344.json",
+    "external_id": "6446d98d-4b18-4057-8669-28ec303487c4",
+    "created_at": "2016-02-27T04:42:56 -11:00",
+    "type": "problem",
+    "subject": "A Catastrophe in Palau",
+    "description": "Laboris sit minim voluptate do veniam non pariatur consequat laboris ipsum culpa eu ipsum sunt. Ex officia in Lorem in nulla laboris cillum adipisicing id culpa labore qui aliqua.",
+    "priority": "high",
+    "status": "solved",
+    "submitter_id": 28,
+    "assignee_id": 39,
+    "organization_id": 103,
+    "tags": [
+      "Michigan",
+      "Florida",
+      "Georgia",
+      "Tennessee"
+    ],
+    "has_incidents": false,
+    "due_at": "2016-08-17T11:16:15 -10:00",
+    "via": "voice"
+  },
+  {
+    "_id": "ec987652-c323-4368-899d-f3c357ff4b87",
+    "url": "http://initech.zendesk.com/api/v2/tickets/ec987652-c323-4368-899d-f3c357ff4b87.json",
+    "external_id": "65a97e71-d859-400c-8051-12b22214255b",
+    "created_at": "2016-05-02T12:31:05 -10:00",
+    "type": "question",
+    "subject": "A Nuisance in Suriname",
+    "description": "Quis sit nulla culpa mollit commodo cupidatat do proident elit ea ea. Et dolore duis consectetur exercitation aliqua.",
+    "priority": "high",
+    "status": "closed",
+    "submitter_id": 27,
+    "assignee_id": 39,
+    "organization_id": 119,
+    "tags": [
+      "Rhodé Island",
+      "Kansas",
+      "Guam",
+      "Colorado"
+    ],
+    "has_incidents": false,
+    "due_at": "2016-08-05T12:38:00 -10:00",
+    "via": "chat"
+  }
+]
