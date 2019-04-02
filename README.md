@@ -35,7 +35,8 @@ All catch error will be written in error.txt automatically
 Search Engine uses [Jest](https://jestjs.io/) as testing framework and there are five testing cases in baseFunctions.test.js. 
 
 ## Plugins
-Search Engine is currently extended with the following plugins. 
+Search Engine is currently extended with the following plugins.
+
 | Plugin | README |
 | ------ | ------ |
 | commander | [README.md](https://github.com/tj/commander.js/blob/master/Readme.md) |
@@ -46,9 +47,14 @@ Search Engine is currently extended with the following plugins.
 
 ## Some attempts 
 - Typescript
+
 Tried to use typescript with Node.js. 
 As a develoepr with object oriented background(Thanks! Java), Typescript is a better option for me. Tried set up once, but there is something wrong with the configuration. Given time frame and scope of this project(ts is more suitable for large application). I chose to stay with Js.
+
 - Mongodb
+
 I was thinking to manage data in json files with Mongodb. That was how I started as well. However, after gave it a second thought, I realized I may make this project complicated. 
+
 - Error.txt
+
 Error report was in json format. My origin design was to create one error.json file which recorded error occur time, error type and error info. But I couldn't fix appending problem. Tried solution in  [this](https://github.com/jprichardson/node-jsonfile/issues/67), but "read in data --> Object.assign --> write new data " would result block issue. As a result, I replaced json with plain txt
