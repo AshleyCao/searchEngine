@@ -1,6 +1,1 @@
 
-time: 2019-04-02T10:18:20.528Z, type:File error, info: Error: ./data/user.json: ENOENT: no such file or directory, open 'C:\Users\ashleyca\Documents\SearchEngine\data\user.json'
-time: 2019-04-02T10:19:43.847Z, type:File error, info: Error: ./data/user.json: ENOENT: no such file or directory, open 'C:\Users\ashleyca\Documents\SearchEngine\data\user.json'
-time: 2019-04-02T10:20:14.865Z, type:File error, info: Error: ./data/user.json: ENOENT: no such file or directory, open 'C:\Users\ashleyca\Documents\SearchEngine\data\user.json'
-time: 2019-04-02T10:44:47.217Z, type:File error, info: Error: ./data/fakefile.json: ENOENT: no such file or directory, open 'C:\Users\ashleyca\Documents\SearchEngine\data\fakefile.json'
-time: 2019-04-02T10:45:16.579Z, type:File error, info: Error: ./data/fakefile.json: ENOENT: no such file or directory, open 'C:\Users\ashleyca\Documents\SearchEngine\data\fakefile.json'
