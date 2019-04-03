@@ -17,15 +17,24 @@ You could search by one object in an array( such as tags:['a', 'b']).
 ## Usage
 1. start projet
 In CLI type ```node start.js start``` (If you have run ```yarn link```, you can also start by ```startengine start```)
+
 2. Search Data
+
 2.1 select file/group and select search field
+
 ![START](https://github.com/AshleyCao/searchEngine/blob/master/screenshots/start.PNG "Logo Title Text 1")
-2.1 Input search value to get result, please input exact data, no wildcard search supported here.
+
+2.2 Input search value to get result, please input exact data, no wildcard search supported here.
 You can search by one object in tags. 
+
 ![GETRESULT](https://github.com/AshleyCao/searchEngine/blob/master/screenshots/select%26search.PNG "Logo Title Text 1")
+
 3. User can also export search result to new json file
+
 ![EXPORTDATA](https://github.com/AshleyCao/searchEngine/blob/master/screenshots/exportdata.PNG)
+
 4. User can search again in the same file/different files or just exit
+
 ![RECUISIVEMENU](https://github.com/AshleyCao/searchEngine/blob/master/screenshots/recusive.PNG)
 
 ## About errors
